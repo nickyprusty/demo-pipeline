@@ -1,0 +1,72 @@
+
+<div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-md-4 offset-md-4 text-center">
+        <button mat-raised-button color="primary" class="mr-1" (click)="changeData('fixtures')">Fixtures</button>
+        <button mat-raised-button color="primary" (click)="changeData('entrance')">Entrance Set</button>
+      </div>
+    </div>
+    
+    <div class="row mt-3" *ngIf="dataArray">
+      <div class="col-lg-10 offset-lg-1 col-12">
+        <h2>{{dataHeading}}
+          <span class="float-right">
+            <button class="btn btn-success">Add Set <i class="fa fa-plus text-light ml-1 mt-1" aria-hidden="true"></i></button>
+          </span>
+        </h2>
+        <div class="text-center" *ngIf="loading"><mat-spinner></mat-spinner></div>
+        <table class="table" *ngIf="!loading">
+            <thead>
+                <th *ngFor="let keys of objectKeys(dataArray[0])">{{keys}}</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of dataArray">
+                    <td *ngFor="let item of data | keyvalue:originalOrder">
+                        <div [ngSwitch]="checkType(item.value)">
+                          <div *ngSwitchCase="'string'">
+                            <div *ngIf="item.key.toLowerCase()=='set'">
+                              {{item.key}} {{item.value}}
+                            </div>
+                            <div *ngIf="item.key.toLowerCase()!='set'">
+                              <ng-container [ngTemplateOutlet]="dropdownTemplate" [ngTemplateOutletContext]="{item: item.key}">
+                              </ng-container>
+                            </div>
+                          </div>
+                          <div *ngSwitchCase="'number'">
+                            <ng-container [ngTemplateOutlet]="item.key.toLowerCase()=='quantity' ?  numberTemplate : null" [ngTemplateOutletContext]="{item: item}">
+                            </ng-container>
+                          </div>
+                          <div *ngSwitchCase="'boolean'" class="text-center">
+                            <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" [attr.id]="''+item.key + dataArray.indexOf(data)">
+                              <label class="custom-control-label" [attr.for]="''+item.key + dataArray.indexOf(data)"></label>
+                            </div>
+                          </div>
+                          <div *ngSwitchDefault>
+                            {{item.key}} {{item.value}}
+                          </div>
+                        </div>
+                    </td>
+                    <td>
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <ng-template #dropdownTemplate let-item="item">
+    <select class="form-control">
+      <option disabled selected value="">Select</option>
+      <option *ngFor="let opt of mockDropDowns[item]" >{{opt}}</option>
+    </select>
+  </ng-template>
+
+  <ng-template #numberTemplate let-item='item'>
+    <span>
+      <i class="fa fa-minus mr-1 mt-1" aria-hidden="true"></i> 
+      {{item.value}} 
+      <i class="fa fa-plus ml-1 mt-1" aria-hidden="true"></i>
+    </span>
+  </ng-template>

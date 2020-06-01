@@ -1,0 +1,26 @@
+[
+    {
+        "set": "A",
+        "quantity":2,
+        "fixtureType":"fixturetype1",
+        "fixtureDesign":"fixturedesign1",
+        "finish":"finish1",
+        "notes":"notes1"       
+    },
+    {
+        "set": "B",
+        "quantity":2,
+        "fixtureType":"fixturetype2",
+        "fixtureDesign":"fixturedesign2",
+        "finish":"finish2",
+        "notes":"notes2"       
+    },
+    {
+        "set": "C",
+        "quantity":2,
+        "fixtureType":"fixturetype3",
+        "fixtureDesign":"fixturedesign3",
+        "finish":"finish3",
+        "notes":"notes3"     
+    }
+]

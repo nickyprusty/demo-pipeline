@@ -1,0 +1,12 @@
+[
+    {
+        "quantity":1,
+        "leftJamb":"Controller",
+        "rightJamb":"HW Access",
+        "thickness":true,
+        "weldedFrame":false,
+        "frameFinish":"Powder Coated",
+        "doorFinish":"Powder Coated",
+        "sillFinish":"Aluminiunm"
+    }
+]
